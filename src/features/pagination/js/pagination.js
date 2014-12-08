@@ -95,6 +95,12 @@
           if (!grid.options.enablePagination) {
             return renderableRows;
           }
+
+          // filter out not visible(excluded by previous search like a column filter) rows
+          renderableRows = renderableRows.filter(function (row) {
+            return row.visible;
+          });
+
           grid.pagination.totalPages = Math.max(
             1,
             Math.ceil(renderableRows.length / grid.options.rowsPerPage)
